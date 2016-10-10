@@ -69,13 +69,13 @@ public class SocketUtils {
 								/ 1000 + "\r\n";
 						op.write(res.getBytes());
 						op.flush();
-						// BufferedReader br = new BufferedReader(
-						// new InputStreamReader(
-						// clientSocket.getInputStream()));
-						// res = br.readLine();
-						// if (!TextUtils.isEmpty(res)) {
-						// Log.e(TAG, res);
-						// }
+						InputStream input = clientSocket.getInputStream();
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(input));
+						res = br.readLine();
+						if (!TextUtils.isEmpty(res)) {
+							Log.e(TAG, res);
+						}
 						clientSocket.close();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -124,12 +124,11 @@ public class SocketUtils {
 						if (!TextUtils.isEmpty(res)) {
 							Log.e(TAG, res);
 						}
-						// OutputStream op = socket.getOutputStream();
-						// BufferedWriter bw = new BufferedWriter(
-						// new OutputStreamWriter(op));
-						// bw.write("curUtc:" + System.currentTimeMillis() /
-						// 1000
-						// + "\n");
+						OutputStream op = socket.getOutputStream();
+						res = "curUtc:" + System.currentTimeMillis() / 1000
+								+ "\r\n";
+						op.write(res.getBytes());
+						op.flush();
 						socket.close();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
