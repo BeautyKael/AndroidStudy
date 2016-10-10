@@ -5,15 +5,14 @@
  * @date Oct 9, 2016 11:24:02 AM
  * @version 1.0
  */
-package httputils;
+package net.http;
 
-/** 
+/**
  * Àà×¢ÊÍ
+ * 
  * @author Zhouls
  * @date Oct 9, 2016 11:24:02 AM
  */
 public interface IHttpClient {
-	
-
 
 }

@@ -5,7 +5,7 @@
  * @date Oct 9, 2016 3:33:52 PM
  * @version 1.0
  */
-package animation;
+package ui.animation;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;

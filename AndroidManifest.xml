@@ -24,9 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="animation.AnimationActivity" >
+        <activity android:name="ui.animation.AnimationActivity" >
             <intent-filter>
-                <action android:name="com.animation.animationactivity" />
+                <action android:name="com.ui.animation.animationactivity" />
 
                 <category android:name="android.intent.category.DEFAULT" >
                 </category>
