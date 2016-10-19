@@ -8,9 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="300dp" >
+
+        <ui.view.mapview.MapView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ui.view.mapview.MapView>
+    </LinearLayout>
 
 </RelativeLayout>

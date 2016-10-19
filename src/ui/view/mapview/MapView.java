@@ -1,7 +1,10 @@
 package ui.view.mapview;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -37,8 +40,8 @@ public class MapView extends ImageView {
 	}
 
 	static final int NONE = 0;
-	static final int DRAG = 0;
-	static final int ZOOM = 0;
+	static final int DRAG = 1;
+	static final int ZOOM = 2;
 
 	int mode = NONE;
 	private float oldDis = 0;
@@ -51,12 +54,18 @@ public class MapView extends ImageView {
 
 	private void init(Context mContext) {
 		this.mContext = mContext;
+		try {
+			bitmap = BitmapFactory.decodeStream(mContext.getAssets().open(
+					"back.jpg"));
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 		setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
 				// TODO 自动生成的方法存根
-
 				switch (event.getAction() & MotionEvent.ACTION_MASK) {
 				case MotionEvent.ACTION_DOWN:
 					// 单点按下
@@ -110,6 +119,45 @@ public class MapView extends ImageView {
 	}
 
 	Paint paint = new Paint();
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO 自动生成的方法存根
+		int width = 0;
+		int height = 0;
+		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+		int dirWidth = getPaddingLeft() + bitmap.getWidth() + getPaddingRight();
+		int dirHeight = getPaddingTop() + bitmap.getHeight()
+				+ getPaddingBottom();
+		switch (widthMode) {
+		case MeasureSpec.EXACTLY:
+			// 精确值
+			width = widthSize;
+			break;
+		case MeasureSpec.AT_MOST:
+			// 最大不能超过父类
+			width = Math.min(dirWidth, widthSize);
+			break;
+		default:
+			break;
+		}
+		switch (heightMode) {
+		case MeasureSpec.EXACTLY:
+			// 精确值
+			height = heightSize;
+			break;
+		case MeasureSpec.AT_MOST:
+			// 最大不能超过父类
+			height = Math.min(dirHeight, heightSize);
+			break;
+		default:
+			break;
+		}
+		setMeasuredDimension(width, height);
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
